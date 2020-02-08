@@ -57,7 +57,8 @@ class TestController extends Controller
 
     }
 
-    //私钥验签来的
+    
+    //私钥解密
     public function rsadescypt1()
     {
         $enc_data_str = $_GET['data'];
