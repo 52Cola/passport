@@ -19,6 +19,8 @@ Route::get('/test/check','TestController@md5test');     //注册
 Route::get('/test/check2','TestController@check2');     //验证签名
 
 Route::get('/test/rsa','TestController@rsadescypt1');     //私钥验签
+Route::get('aes','Client\ClientController@aes');//对称加密
+
 
 Route::post('/api/user/reg','User\UserController@reg');     //注册
 Route::post('/api/user/login','User\UserController@login'); // 登录

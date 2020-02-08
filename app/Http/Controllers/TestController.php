@@ -71,4 +71,24 @@ class TestController extends Controller
         openssl_public_decrypt($base64_decode_str,$dec_data,$pub_key);
         echo "解密数据：".$dec_data;echo "</br>";
     }
+
+    //对称加密
+    public function aes(){
+        $str='huangxiaobo1111';     //待加密的数据
+        $method='AES-256-CBC';  //加密方式
+        $key='sbhsfubsfdfqwijpjpsjasfnkoihogub';    //加密的密钥
+        $iv='jingtdjopvrfhutd';       //必须为16位
+
+        //加密函数进行加密
+        $enc=openssl_encrypt($str,$method,$key,OPENSSL_RAW_DATA,$iv);
+        //不可读模式转换成可读模式
+        $str_base=base64_encode($enc);
+        //转换为可传输数据类型
+        $str_url=urlencode($str_base);
+        $url='http://1905server.com/sign/aes?str='.$str_url;
+        $g=file_get_contents($url);
+        echo $g;
+        // $d=openssl_decrypt($enc,$method,$key,OPENSSL_RAW_DATA,$iv);
+        // echo $d;
+    }
 }
