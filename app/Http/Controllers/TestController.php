@@ -36,7 +36,6 @@ class TestController extends Controller
     }
     public function check2()
     {
-
         $key = "1905";      // 计算签名的key
 
         echo '<pre>';print_r($_POST);
@@ -56,5 +55,20 @@ class TestController extends Controller
         }
 
 
+    }
+
+    //私钥验签来的
+    public function rsadescypt1()
+    {
+        $enc_data_str = $_GET['data'];
+        echo "</br>";
+        echo "接收到的base64的密文：".$enc_data_str;echo "</br>";
+        $base64_decode_str = base64_decode($enc_data_str);
+        echo "base64decode 密文：".$base64_decode_str;echo "</br>";
+        //解密
+        $pub_key = trim(file_get_contents(storage_path('keys/pub.key')));
+        // echo $pub_key;
+        openssl_public_decrypt($base64_decode_str,$dec_data,$pub_key);
+        echo "解密数据：".$dec_data;echo "</br>";
     }
 }
